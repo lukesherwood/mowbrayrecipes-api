@@ -27,6 +27,9 @@ gem 'rack-cors'
 gem "figaro"
 gem "solargraph"
 gem 'active_model_serializers'
+gem 'bcrypt', '~> 3.1.7'
+gem 'devise'
+gem 'devise-jwt'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
