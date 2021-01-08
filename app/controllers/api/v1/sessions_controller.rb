@@ -12,7 +12,7 @@ class Api::V1::SessionsController < Devise::SessionsController
         jti = payload.first['jti']
         @user = User.find_by(jti: jti )
         if @user
-            render json: @user
+            render json: @user.to_json
         else
             render json: {message: 'user not found from token'}
         end
