@@ -26,7 +26,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 gem 'rack-cors'
 gem "figaro"
 gem "solargraph"
-gem 'active_model_serializers'
+gem 'jsonapi-serializer'
 gem 'bcrypt', '~> 3.1.7'
 gem 'devise'
 gem 'devise-jwt'

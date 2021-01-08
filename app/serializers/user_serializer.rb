@@ -1,4 +1,5 @@
-class UserSerializer < ActiveModel::Serializer
-  attributes :name, :id, :email
+class UserSerializer
+  include JSONAPI::Serializer
+  attributes :name, :id, :email, :jti
   has_many :recipes
 end

@@ -12,14 +12,14 @@ class Api::V1::UsersController < ApplicationController
     def update
         @user = User.find(user_params[:id])
         if @user.update(user_params)
-            render json: @user, status: 200
+            render json: render json: UserSerializer.new(@user).serializable_hash.to_json, status: 200
         end
     end
 
     def create
         @user = User.new(user_params)
         if @user.save
-            render json: @user, status: 200
+            render json: render json: UserSerializer.new(@user).serializable_hash.to_json, status: 200
         else
             render json: {message: 'user not created'}
         end

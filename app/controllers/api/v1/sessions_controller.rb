@@ -12,7 +12,7 @@ class Api::V1::SessionsController < Devise::SessionsController
         jti = payload.first['jti']
         @user = User.find_by(jti: jti )
         if @user
-            render json: @user.to_json
+            render json: UserSerializer.new(@user).serializable_hash.to_json
         else
             render json: {message: 'user not found from token'}
         end
@@ -20,6 +20,6 @@ class Api::V1::SessionsController < Devise::SessionsController
 
     private
     def respond_with(resource, _opts = {})
-        render json: resource
+        render json: resource.to_json
     end
   end

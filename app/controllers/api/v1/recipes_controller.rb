@@ -6,7 +6,7 @@ class Api::V1::RecipesController < ApplicationController
         jti = payload.first['jti']
         @user = User.find_by(jti: jti )
         @recipes = Recipe.where(user_id: @user.id)
-        render json: @recipes.as_json
+        render json: RecipeSerializer.new(@recipes, include: [:'user.name']).serializable_hash.to_json
     end
 
     def show

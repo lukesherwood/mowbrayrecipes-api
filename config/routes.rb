@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root 'home#welcome'
   devise_for :users,
              defaults: { format: :json },
              class_name: 'User',
@@ -15,5 +16,6 @@ Rails.application.routes.draw do
       end
     end
   end
+  
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
