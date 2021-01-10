@@ -1,6 +1,5 @@
 class RecipeSerializer
   include JSONAPI::Serializer
-  attributes :name, :ingredients, :method, :notes, :image_url
+  attributes :name, :ingredients, :method, :serves, :image_url, :cook_time, :prep_time, :cuisine, :course
   belongs_to :user
-  set_key_transform :camel_lower
 end
