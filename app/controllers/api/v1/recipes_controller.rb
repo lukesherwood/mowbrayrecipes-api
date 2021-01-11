@@ -1,12 +1,23 @@
 class Api::V1::RecipesController < ApplicationController
 
     def index
+        # token = request.headers['Authorization'].split(" ").last
+        # payload = JWT.decode(token, ENV['DEVISE_JWT_SECRET_KEY'], true, algorithm: 'HS256')
+        # jti = payload.first['jti']
+        # @user = User.find_by(jti: jti )
+        # @recipes = Recipe.where(user_id: @user.id)
+        @recipes = Recipe.all.sort { |a,b| a.updated_at <=> b.updated_at }
+        options = { include: [:user.name], fields: { user: [:name] } }
+        # options[:include] = [:user, :'users.name', :'actors.agency.state']
+        render json: RecipeSerializer.new(@recipes, options).serializable_hash.to_json
+    end
+
+    def userRecipes
         token = request.headers['Authorization'].split(" ").last
         payload = JWT.decode(token, ENV['DEVISE_JWT_SECRET_KEY'], true, algorithm: 'HS256')
         jti = payload.first['jti']
         @user = User.find_by(jti: jti )
-        @recipes = Recipe.where(user_id: @user.id)
-        # options[:include] = [:user, :'users.name', :'actors.agency.state']
+        @recipes = Recipe.where(user_id: @user.id).sort { |a,b| a.updated_at <=> b.updated_at }
         render json: RecipeSerializer.new(@recipes).serializable_hash.to_json
     end
 

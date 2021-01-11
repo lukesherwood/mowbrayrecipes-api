@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   namespace :api do 
     namespace :v1 do
       resources :recipes
+      get '/userRecipes', to: 'recipes#userRecipes'
       devise_scope :user do
         get '/users/auto_login', to: 'sessions#auto_login' 
       end
