@@ -48,6 +48,15 @@ class Api::V1::RecipesController < ApplicationController
         end
     end
 
+    def destroy
+        @recipe = Recipe.find(recipe_params[:id])
+        if @recipe.destroy
+            render json: {}, status: :accepted
+        else
+            render json: {message: 'Error deleting recipe'}
+        end
+    end
+
     private
 
     def recipe_params
