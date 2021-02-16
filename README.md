@@ -1,24 +1,21 @@
-# README
+# Mowbray Family Recipes
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Add your favorite recipes and share with the family
 
-Things you may want to cover:
+Deployed at https://mowbrayrecipes.netlify.app
 
-* Ruby version
+Frontend repo (https://github.com/lukesherwood/mowbrayrecipes-frontend)
 
-* System dependencies
 
-* Configuration
+Backend is built with Ruby on Rails, users are securely managed with Devise and JWT tokens are used to manage user sessions. Database and server are with PostgreSQL.
 
-* Database creation
+Frontend is built with React-JS and state is managed with Redux. Styling with Bootstrap and custom CSS.
 
-* Database initialization
+### Future Updates
 
-* How to run the test suite
+    - Comments
+    - Notes/Description of recipes
+    - Upload and hosting of images
+    - organize by categories
+    - search function
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
