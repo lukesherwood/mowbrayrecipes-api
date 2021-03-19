@@ -1,5 +1,5 @@
 class Api::V1::UsersController < ApplicationController
-before_action :set_params_user, only: [:update, :show, :destroy ]
+  before_action :set_params_user, only: %i[update show destroy]
 
   def show
     if @user
