@@ -1,15 +1,11 @@
 class Api::V1::UsersController < ApplicationController
+before_action :set_params_user, only [:update, :show, :destroy ]
+
   def show
-    @user = User.find(params[:id])
-    if @user
-      render json: @user
-    else
-      render json: { message: 'user not found' }
-    end
+    @user ? render json: @user : render json: { message: 'user not found' }
   end
 
   def update
-    @user = User.find(user_params[:id])
     render json: UserSerializer.new(@user).serializable_hash.to_json, status: 200 if @user.update(user_params)
   end
 
@@ -23,15 +19,14 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def destroy
-    @user = User.find(user_params[:id])
-    if @user.destroy
-      render body: {}, status: :no_content
-    else
-      render json: { message: 'Error deleting user' }
-    end
+    @user.destroy ? render body: {}, status: :no_content : render json: { message: 'Error deleting user' }
   end
 
   private
+
+  def set_params_user
+    @user = User.find(user_params[:id])
+  end
 
   def user_params
     params.require(:user).permit(:name, :email, :password, :id)

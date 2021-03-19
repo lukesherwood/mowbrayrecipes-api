@@ -8,4 +8,11 @@ class ApplicationController < ActionController::API
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
   end
+
+  def set_user
+    token = request.headers['Authorization'].split(' ').last
+    payload = JWT.decode(token, ENV['DEVISE_JWT_SECRET_KEY'], true, algorithm: 'HS256')
+    jti = payload.first['jti']
+    @user = User.find_by(jti: jti)
+  end
 end
