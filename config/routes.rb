@@ -10,7 +10,9 @@ Rails.application.routes.draw do
              path_prefix: '/api/v1'
   namespace :api do
     namespace :v1 do
-      resources :recipes
+      resources :recipes do
+        resources :comments
+      end
       get '/userRecipes', to: 'recipes#userRecipes'
       devise_scope :user do
         get '/users/auto_login', to: 'sessions#auto_login'
