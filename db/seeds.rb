@@ -9,6 +9,7 @@
 admin = User.create(name: 'Admin', email: 'admin@example.com', password: 'password')
 admin.recipes.create(user_id: admin.id, 
                     ingredients: '1t water, 2T flour, 2C sugar',
+                    description: 'my first recipe added to the interwebs'
                     method: 'mix together and bake in a pie dish', 
                     course: 'Breakfast', 
                     cuisine: 'American', 
