@@ -8,15 +8,15 @@ Rails.application.routes.draw do
                registrations: 'api/v1/registrations'
              },
              path_prefix: '/api/v1'
-  namespace :api do 
+  namespace :api do
     namespace :v1 do
       resources :recipes
       get '/userRecipes', to: 'recipes#userRecipes'
       devise_scope :user do
-        get '/users/auto_login', to: 'sessions#auto_login' 
+        get '/users/auto_login', to: 'sessions#auto_login'
       end
     end
   end
-  
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

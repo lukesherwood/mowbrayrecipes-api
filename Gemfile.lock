@@ -248,6 +248,7 @@ DEPENDENCIES
   puma
   rack-cors
   rails (~> 6.1.0)
+  rubocop
   solargraph
   spring
   tzinfo-data
