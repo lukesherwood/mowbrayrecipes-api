@@ -1,8 +1,12 @@
 class Api::V1::UsersController < ApplicationController
-before_action :set_params_user, only [:update, :show, :destroy ]
+before_action :set_params_user, only: [:update, :show, :destroy ]
 
   def show
-    @user ? render json: @user : render json: { message: 'user not found' }
+    if @user
+      render json: @user
+    else
+      render json: { message: 'user not found' }
+    end
   end
 
   def update
@@ -19,7 +23,11 @@ before_action :set_params_user, only [:update, :show, :destroy ]
   end
 
   def destroy
-    @user.destroy ? render body: {}, status: :no_content : render json: { message: 'Error deleting user' }
+    if @user.destroy
+      render body: {}, status: :no_content
+    else
+      render json: { message: 'Error deleting user' }
+    end
   end
 
   private
