@@ -13,6 +13,6 @@ class ApplicationController < ActionController::API
     token = request.headers['Authorization'].split(' ').last
     payload = JWT.decode(token, ENV['DEVISE_JWT_SECRET_KEY'], true, algorithm: 'HS256')
     jti = payload.first['jti']
-    @user = User.find_by(jti: jti)
+    return User.find_by(jti: jti)
   end
 end

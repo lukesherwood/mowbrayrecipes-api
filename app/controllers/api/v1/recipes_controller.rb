@@ -6,10 +6,7 @@ class Api::V1::RecipesController < ApplicationController
   end
 
   def userRecipes
-    token = request.headers['Authorization'].split(' ').last
-    payload = JWT.decode(token, ENV['DEVISE_JWT_SECRET_KEY'], true, algorithm: 'HS256')
-    jti = payload.first['jti']
-    @user = User.find_by(jti: jti)
+    @user = set_user()
     @recipes = Recipe.where(user_id: @user.id).sort { |a, b| a.updated_at <=> b.updated_at }
     render json: RecipeSerializer.new(@recipes).serializable_hash.to_json
   end
@@ -24,9 +21,9 @@ class Api::V1::RecipesController < ApplicationController
   end
 
   def create
-    recipe = Recipe.new(recipe_params)
+    @recipe = Recipe.new(recipe_params)
     if recipe.save
-      render json: RecipeSerializer.new(recipe).serializable_hash.to_json
+      render json: RecipeSerializer.new(@recipe, params: { recipe: @recipe }).serializable_hash.to_json
     else
       render json: recipe.errors, status: :unprocessable_entity
     end
@@ -35,7 +32,7 @@ class Api::V1::RecipesController < ApplicationController
   def update
     @recipe = Recipe.find(recipe_params[:id])
     if @recipe.update(recipe_params)
-      render json: RecipeSerializer.new(@recipe).serializable_hash.to_json
+      render json: RecipeSerializer.new(@recipe, params: { context: self }).serializable_hash.to_json
     else
       render json: @recipe.errors, status: :unprocessable_entity
     end
@@ -54,6 +51,6 @@ class Api::V1::RecipesController < ApplicationController
 
   def recipe_params
     params.require(:recipe).permit(:user_id, :name, :ingredients, :id, :method, :serves, :image_url, :course,
-                                   :cuisine, :prep_time, :cook_time, :description)
+                                   :cuisine, :prep_time, :cook_time, :description, :image)
   end
 end
