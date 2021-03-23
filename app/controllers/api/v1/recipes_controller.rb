@@ -22,10 +22,10 @@ class Api::V1::RecipesController < ApplicationController
 
   def create
     @recipe = Recipe.new(recipe_params)
-    if recipe.save
+    if @recipe.save
       render json: RecipeSerializer.new(@recipe, params: { recipe: @recipe }).serializable_hash.to_json
     else
-      render json: recipe.errors, status: :unprocessable_entity
+      render json: @recipe.errors, status: :unprocessable_entity
     end
   end
 
