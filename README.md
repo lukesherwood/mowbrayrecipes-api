@@ -12,10 +12,6 @@ Backend is built with Ruby on Rails, users are securely managed with Devise and 
 Frontend is built with React-JS and state is managed with Redux. Styling with Bootstrap and custom CSS.
 
 ### Future Updates
+    - organize by categories filter
 
-    - Comments
-    - Notes/Description of recipes
-    - Upload and hosting of images
-    - organize by categories
-    - search function
 
